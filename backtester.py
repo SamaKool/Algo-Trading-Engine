@@ -58,8 +58,27 @@ class Backtester:
         self.data['Strategy_Net_Return'] = self.data['Strategy_Return'] - (self.data['Trades'] * transaction_cost)
         
         # Cumulative Returns
-        cumulative_return = (1 + self.data['Strategy_Net_Return']).cumprod()
-        return cumulative_return
+        self.data['Cumulative'] = (1 + self.data['Strategy_Net_Return']).cumprod()
+
+        # Max Drawdown
+        self.data['Running_Max'] = self.data['Cumulative'].cummax()
+        self.data['Drawdown'] = self.data['Cumulative'] / self.data['Running_Max'] - 1
+        max_drawdown = self.data['Drawdown'].min()
+        total_return = (self.data['Cumulative'].iloc[-1] - 1) * 100
+
+        # Sharpe Ratio
+        mean_return = self.data['Strategy_Net_Return'].mean()
+        volatility = self.data['Strategy_Net_Return'].std()
+        if volatility > 0:
+            Sharpe_Ratio = (mean_return/volatility) * (252**0.5)
+        
+        else:
+            volatility = 0
+
+        print(f"Total Return: {total_return:.4f}%")
+        print(f"Max Drawdown: {max_drawdown * 100:.4f}%")
+        print(f"Sharpe Ratio: {Sharpe_Ratio:.4f}")
+        return self.data['Cumulative']
 
     def plot_results(self):
         if self.data is None: 
