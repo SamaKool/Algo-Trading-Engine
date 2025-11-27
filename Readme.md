@@ -30,7 +30,12 @@ $$SMA_n = \frac{1}{n} \sum_{i=0}^{n-1} P_{t-i}$$
 ## Performance Analysis
 The engine was backtested on Apple (AAPL) data from 2024-2025.
 
-Key Insight: Notably, during the Q1 2025 market correction, the algorithm successfully identified the trend reversal and shifted to a cash position (neutral). This risk management behavior prevented the ~30% drawdown that the "Buy & Hold" benchmark suffered, allowing the strategy to significantly outperform the underlying asset by year-end.
+### Key Metrics
+* **Total Return:** 70.13% (vs Benchmark ~30%)
+* **Max Drawdown:** -14.05% (vs Benchmark -30%)
+* **Sharpe Ratio:** 1.82
+
+**Key Insight:** Notably, during the Q1 2025 market correction, the algorithm successfully identified the trend reversal and shifted to a cash position (neutral). This risk management behavior prevented the ~30% drawdown that the "Buy & Hold" benchmark suffered, allowing the strategy to significantly outperform the underlying asset by year-end.
 
 <img width="100%" alt="Result_chart" src="./Result_chart.png" />
 
